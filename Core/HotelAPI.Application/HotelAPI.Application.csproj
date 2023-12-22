@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Repositories\" />
+    <Folder Include="Utilities\Constants\" />
+    <Folder Include="Utilities\Extentions\" />
+    <Folder Include="Utilities\Security\" />
+    <Folder Include="Utilities\Results\" />
+    <Folder Include="Utilities\Profiles\" />
+    <Folder Include="Utilities\Validations\FluentValidation\" />
+  </ItemGroup>
+
+</Project>
