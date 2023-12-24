@@ -6,6 +6,7 @@ public class Room:BaseEntity
     public int Floor { get; set; }
     public string Phone { get; set; }
     public double Price { get; set; }
+    public string Description { get; set; }
     public RoomState RoomState { get; set; } = RoomState.Available;
     public List<Equipment> Equipments { get; set; }
 
