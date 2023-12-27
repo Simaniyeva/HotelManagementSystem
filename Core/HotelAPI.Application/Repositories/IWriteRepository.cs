@@ -2,10 +2,12 @@
 
 namespace HotelAPI.Application.Repositories;
 
-public interface IWriteRepository<TEntity> :IRepository<TEntity> where TEntity : class,IEntityBase,new()
+public interface IWriteRepository<TEntity> :IRepository<TEntity> where TEntity : BaseEntity, IEntityBase,new()
 {
     Task CreateAsync(TEntity entity);
-    Task CreateRangeASync(List<TEntity> entities);
+    Task CreateRangeAsync(List<TEntity> entities);
     void Update(TEntity entity);
     void Delete(TEntity entity);
+    Task DeleteAsync(int id);
+    void DeleteRange(List<TEntity> entities);
 }

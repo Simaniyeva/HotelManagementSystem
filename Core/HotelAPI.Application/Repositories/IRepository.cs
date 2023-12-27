@@ -2,6 +2,6 @@
 
 namespace HotelAPI.Application.Repositories;
 
-public interface IRepository<TEntity>where TEntity : class,IEntityBase, new()
+public interface IRepository<TEntity>where TEntity : BaseEntity, IEntityBase, new()
 {
 }

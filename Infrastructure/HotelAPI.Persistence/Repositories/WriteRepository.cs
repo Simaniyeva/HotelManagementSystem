@@ -1,27 +1,49 @@
 ﻿using HotelAPI.Application.Repositories;
+using HotelAPI.Persistence.DbContexts;
 
 namespace HotelAPI.Persistence.Repositories
 {
-    public class WriteRepository<TEntity> : IWriteRepository<TEntity> where TEntity : class, IEntityBase, new()
+    public class WriteRepository<TEntity> : IWriteRepository<TEntity> where TEntity : BaseEntity, IEntityBase, new()
     {
-        public Task CreateAsync(TEntity entity)
+        private readonly HotelIdentityDbContext _context;
+
+        public WriteRepository(HotelIdentityDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task CreateRangeASync(List<TEntity> entities)
+        public async Task CreateAsync(TEntity entity)
         {
-            throw new NotImplementedException();
+            await _context.Set<TEntity>().AddAsync(entity);
+
+        }
+
+        public async Task CreateRangeAsync(List<TEntity> entities)
+        {
+            await _context.Set<TEntity>().AddRangeAsync(entities);
         }
 
         public void Delete(TEntity entity)
         {
-            throw new NotImplementedException();
+            _context.Set<TEntity>().Remove(entity);
+
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            TEntity model = await _context.Set<TEntity>().FirstOrDefaultAsync(b => b.Id == id);
+           Delete(model);   
+        }
+
+        public void DeleteRange(List<TEntity> entities)
+        {
+           _context.RemoveRange(entities);
         }
 
         public void Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            _context.ChangeTracker.Clear();
+            _context.Set<TEntity>().Update(entity);
         }
     }
 }
