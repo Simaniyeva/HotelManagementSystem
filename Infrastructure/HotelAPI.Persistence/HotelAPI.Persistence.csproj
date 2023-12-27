@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Concrete\" />
-    <Folder Include="Repositories\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\HotelAPI.Application\HotelAPI.Application.csproj" />
     <ProjectReference Include="..\..\Core\HotelAPI.Domain\HotelAPI.Domain.csproj" />
   </ItemGroup>
 

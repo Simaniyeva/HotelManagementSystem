@@ -7,12 +7,12 @@ public class ReservationConfiguration : IEntityTypeConfiguration<Reservation>
     {
         builder.HasKey(b => b.Id);
         builder.Property(b => b.CheckInDate).IsRequired().HasDefaultValueSql("GETUTCDATE()");
-        builder.Property(b => b.entityStatus).IsRequired().HasDefaultValue(false);
+      
         builder.Property(b => b.CreatedDate).IsRequired().HasDefaultValueSql("GETUTCDATE()");
 
         //Relations
-        builder.HasOne(b => b.Room).WithMany(b => b.Reservations).HasForeignKey(b => b.RoomId);
-        builder.HasOne(b => b.Reservator).WithMany(b => b.Reservations).HasForeignKey(b => b.ReservatorId);
+        //builder.HasOne(b => b.Room).WithMany(b => b.Reservations).HasForeignKey(b => b.RoomId);
+        //builder.HasOne(b => b.Reservator).WithMany(b => b.Reservations).HasForeignKey(b => b.ReservatorId);
     }
 }
 

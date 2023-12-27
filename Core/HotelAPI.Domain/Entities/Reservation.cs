@@ -1,6 +1,6 @@
 ﻿namespace HotelAPI.Domain.Entities;
 
-public class Reservation:BaseEntity
+public class Reservation:BaseEntity, IEntityBase
 {
     public DateTime CheckInDate { get; set; }
     public DateTime CheckOutDate { get; set; }

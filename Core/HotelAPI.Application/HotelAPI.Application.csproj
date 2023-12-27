@@ -7,8 +7,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Folder Include="Repositories\" />
 		<Folder Include="Utilities\Constants\" />
+		<Folder Include="Utilities\Extentions\" />
 		<Folder Include="Utilities\Security\" />
 		<Folder Include="Utilities\Results\" />
 		<Folder Include="Utilities\Profiles\" />
@@ -22,7 +22,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\Infrastructure\HotelAPI.Persistence\HotelAPI.Persistence.csproj" />
+	  <ProjectReference Include="..\HotelAPI.Domain\HotelAPI.Domain.csproj" />
 	</ItemGroup>
 
 </Project>

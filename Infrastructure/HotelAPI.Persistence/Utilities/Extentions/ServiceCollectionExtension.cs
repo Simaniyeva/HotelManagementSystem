@@ -1,12 +1,9 @@
-﻿
-using HotelAPI.Domain.Entities;
-using HotelAPI.Persistence.DbContexts;
+﻿using HotelAPI.Persistence.DbContexts;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace HotelAPI.Application.Utilities.Extentions;
+namespace HotelAPI.Persistence.Utilities.Extentions;
 
 public static class ServiceCollectionExtension
 {

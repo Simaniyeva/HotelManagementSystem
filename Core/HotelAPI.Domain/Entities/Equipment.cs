@@ -1,6 +1,6 @@
 ﻿namespace HotelAPI.Domain.Entities;
 
-public class Equipment:BaseEntity
+public class Equipment:BaseEntity, IEntityBase
 {
     public string Name { get; set; }
     public int Quantity { get; set; }

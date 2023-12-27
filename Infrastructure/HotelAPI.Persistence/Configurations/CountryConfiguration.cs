@@ -7,7 +7,7 @@ public class CountryConfiguration : IEntityTypeConfiguration<Country>
         builder.HasKey(b => b.Id);
         builder.Property(b => b.Name).IsRequired().HasMaxLength(255);
         builder.Property(b => b.Continent).IsRequired().HasMaxLength(255);
-        builder.Property(b => b.entityStatus).IsRequired().HasDefaultValue(false);
+
         builder.Property(b => b.CreatedDate).IsRequired().HasDefaultValueSql("GETUTCDATE()");
 
         //Relations

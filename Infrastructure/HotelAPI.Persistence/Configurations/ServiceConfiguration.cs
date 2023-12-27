@@ -8,11 +8,11 @@ public class ServiceConfiguration : IEntityTypeConfiguration<Service>
         builder.Property(b => b.Description).IsRequired().HasMaxLength(400);
         builder.Property(b => b.Price).IsRequired().HasMaxLength(50);
         builder.Property(b => b.AvailabilitySchedule).HasMaxLength(255);
-        builder.Property(b => b.entityStatus).IsRequired().HasDefaultValue(false);
+       
         builder.Property(b => b.CreatedDate).IsRequired().HasDefaultValueSql("GETUTCDATE()");
 
         //Relations
-        builder.HasOne(b => b.ServiceType).WithMany(b => b.Services).HasForeignKey(b => b.ServiceTypeId);
+        //builder.HasOne(b => b.ServiceType).WithMany(b => b.Services).HasForeignKey(b => b.ServiceTypeId);
 
 
     }

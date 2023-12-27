@@ -1,6 +1,6 @@
 ﻿namespace HotelAPI.Domain.Entities;
 
-public class Service:BaseEntity
+public class Service:BaseEntity, IEntityBase
 {
     public string Description { get; set; }
     public string AvailabilitySchedule { get; set; }

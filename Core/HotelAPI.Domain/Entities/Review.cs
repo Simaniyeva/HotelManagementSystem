@@ -1,6 +1,6 @@
 ﻿namespace HotelAPI.Domain.Entities;
 
-public class Review:BaseEntity
+public class Review:BaseEntity, IEntityBase
 {
     public string Content { get; set; }
     //Relations

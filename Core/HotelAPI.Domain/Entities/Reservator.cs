@@ -1,6 +1,6 @@
 ﻿namespace HotelAPI.Domain.Entities;
 
-public class Reservator:BaseEntity
+public class Reservator:BaseEntity, IEntityBase
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }

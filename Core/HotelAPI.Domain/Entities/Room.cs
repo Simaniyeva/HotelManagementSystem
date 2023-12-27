@@ -1,6 +1,6 @@
 ﻿namespace HotelAPI.Domain.Entities;
 
-public class Room:BaseEntity
+public class Room:BaseEntity, IEntityBase
 {
     public int Number { get; set; }
     public int Floor { get; set; }

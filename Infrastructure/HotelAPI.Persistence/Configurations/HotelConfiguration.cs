@@ -10,8 +10,7 @@ public class HotelConfiguration : IEntityTypeConfiguration<Hotel>
         builder.Property(b => b.WebSite).HasMaxLength(250);
         builder.Property(b => b.PhoneNumber).IsRequired().HasMaxLength(100);
         builder.Property(b => b.Email).HasMaxLength(100);
-        builder.Property(b => b.Grade).HasDefaultValue(0);
-        builder.Property(b => b.entityStatus).IsRequired().HasDefaultValue(false);
+        builder.Property(b => b.entityStatus).IsRequired();
         builder.Property(b => b.CreatedDate).IsRequired().HasDefaultValueSql("GETUTCDATE()");
 
         //Relations

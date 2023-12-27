@@ -1,6 +1,6 @@
 ﻿namespace HotelAPI.Domain.Entities;
 
-public class City : BaseEntity
+public class City : BaseEntity,IEntityBase
 {
     public string Name { get; set; }
     public string PostalCode { get; set; }

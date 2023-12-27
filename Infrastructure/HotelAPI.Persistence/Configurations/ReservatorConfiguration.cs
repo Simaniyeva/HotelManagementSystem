@@ -9,7 +9,7 @@ public class ReservatorConfiguration : IEntityTypeConfiguration<Reservator>
         builder.Property(b => b.LastName).IsRequired().HasMaxLength(255);
         builder.Property(b => b.Email).HasMaxLength(255);
         builder.Property(b => b.PhoneNumber).IsRequired().HasMaxLength(255);
-        builder.Property(b => b.entityStatus).IsRequired().HasDefaultValue(false);
+        
         builder.Property(b => b.CreatedDate).IsRequired().HasDefaultValueSql("GETUTCDATE()");
 
         //Relations
