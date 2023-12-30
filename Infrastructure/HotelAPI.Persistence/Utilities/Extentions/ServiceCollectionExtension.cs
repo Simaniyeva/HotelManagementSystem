@@ -9,6 +9,7 @@ public static class ServiceCollectionExtension
 {
     public static  IServiceCollection AddServiceRegistration(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddDbContext<HotelIdentityDbContext>(opt =>
         {
             opt.UseSqlServer(configuration.GetConnectionString("Default"));
