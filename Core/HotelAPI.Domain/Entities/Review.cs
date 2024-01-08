@@ -3,6 +3,7 @@
 public class Review:BaseEntity, IEntityBase
 {
     public string Content { get; set; }
+
     //Relations
     public int ReservatorId { get; set; }
     public Reservator Reservator { get; set; }
