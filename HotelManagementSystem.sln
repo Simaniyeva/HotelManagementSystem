@@ -9,15 +9,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{BD6B7209-BCB8-467D-B3A1-C294C4D70768}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelAPI.Application", "Core\HotelAPI.Application\HotelAPI.Application.csproj", "{DAB22CBD-76DA-4526-86C3-C53318D2FD82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelAPI.Application", "Core\HotelAPI.Application\HotelAPI.Application.csproj", "{DAB22CBD-76DA-4526-86C3-C53318D2FD82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelAPI.Domain", "Core\HotelAPI.Domain\HotelAPI.Domain.csproj", "{1BCDD261-EA84-4B59-9507-0E443BADC9CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelAPI.Domain", "Core\HotelAPI.Domain\HotelAPI.Domain.csproj", "{1BCDD261-EA84-4B59-9507-0E443BADC9CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelAPI.Infrastructure", "Infrastructure\HotelAPI.Infrastructure\HotelAPI.Infrastructure.csproj", "{40AA35DB-E9D3-4107-950C-39EA257C13A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelAPI.Infrastructure", "Infrastructure\HotelAPI.Infrastructure\HotelAPI.Infrastructure.csproj", "{40AA35DB-E9D3-4107-950C-39EA257C13A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelAPI.Persistence", "Infrastructure\HotelAPI.Persistence\HotelAPI.Persistence.csproj", "{35A8113B-A56B-4C4F-8381-9212AD7648F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelAPI.Persistence", "Infrastructure\HotelAPI.Persistence\HotelAPI.Persistence.csproj", "{35A8113B-A56B-4C4F-8381-9212AD7648F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelAPI.API", "Presentation\HotelAPI.API\HotelAPI.API.csproj", "{982E2025-D82A-4CBA-9866-A6600158BDD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelAPI.API", "Presentation\HotelAPI.API\HotelAPI.API.csproj", "{982E2025-D82A-4CBA-9866-A6600158BDD3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

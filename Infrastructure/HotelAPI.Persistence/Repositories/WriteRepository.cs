@@ -32,12 +32,17 @@ namespace HotelAPI.Persistence.Repositories
         public async Task DeleteAsync(int id)
         {
             TEntity model = await _context.Set<TEntity>().FirstOrDefaultAsync(b => b.Id == id);
-           Delete(model);   
+            Delete(model);
         }
 
         public void DeleteRange(List<TEntity> entities)
         {
-           _context.RemoveRange(entities);
+            _context.RemoveRange(entities);
+        }
+
+        public async Task<int> SaveAsync()
+        {
+            return await _context.SaveChangesAsync();
         }
 
         public void Update(TEntity entity)

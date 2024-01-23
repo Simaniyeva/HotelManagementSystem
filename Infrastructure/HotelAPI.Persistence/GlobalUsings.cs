@@ -1,28 +1,12 @@
-﻿global using HotelAPI.Application.Repositories.CityRepositories;
-global using HotelAPI.Application.Repositories.CountryRepositories;
-global using HotelAPI.Application.Repositories.EquipmentRepositories;
-global using HotelAPI.Application.Repositories.HotelRepositories;
-global using HotelAPI.Application.Repositories.ReservationRepositories;
-global using HotelAPI.Application.Repositories.ReservatorRepositories;
-global using HotelAPI.Application.Repositories.ReviewRepositories;
-global using HotelAPI.Application.Repositories.RoomRepositories;
-global using HotelAPI.Application.Repositories.RoomTypeRepositories;
-global using HotelAPI.Application.Repositories.ServiceRepositories;
-global using HotelAPI.Application.Repositories.ServiceTypeRepositories;
-global using HotelAPI.Domain.Entities;
-global using HotelAPI.Persistence.DbContexts;
-global using HotelAPI.Persistence.Repositories.Concretes.CityRepositories;
-global using HotelAPI.Persistence.Repositories.Concretes.CountryRepositories;
-global using HotelAPI.Persistence.Repositories.Concretes.EquipmentRepositories;
-global using HotelAPI.Persistence.Repositories.Concretes.HotelRepositories;
-global using HotelAPI.Persistence.Repositories.Concretes.ReservationRepositories;
-global using HotelAPI.Persistence.Repositories.Concretes.ReservatorRepositories;
-global using HotelAPI.Persistence.Repositories.Concretes.ReviewRepositories;
-global using HotelAPI.Persistence.Repositories.Concretes.RoomRepositories;
-global using HotelAPI.Persistence.Repositories.Concretes.RoomTypeRepositories;
-global using HotelAPI.Persistence.Repositories.Concretes.ServiceRepositories;
-global using HotelAPI.Persistence.Repositories.Concretes.ServiceTypeRepositories;
-global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-global using Microsoft.EntityFrameworkCore;
-global using Microsoft.EntityFrameworkCore.Metadata.Builders;
-global using System.Reflection;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HotelAPI.Persistence
+{
+    internal class GlobalUsings
+    {
+    }
+}

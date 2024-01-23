@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\HotelAPI.Domain\HotelAPI.Domain.csproj" />
+    <ProjectReference Include="..\HotelAPI.Persistence\HotelAPI.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>

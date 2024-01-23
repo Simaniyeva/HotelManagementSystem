@@ -1,4 +1,5 @@
-﻿namespace HotelAPI.Domain.DTOs.RoomDtos;
+﻿
+namespace HotelAPI.Domain.DTOs.RoomDtos;
 
 public class RoomGetDto:IDto
 {

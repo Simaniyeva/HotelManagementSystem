@@ -1,4 +1,5 @@
-﻿using HotelAPI.Persistence.DbContexts;
+﻿using HotelAPI.Domain.Entities.Identity;
+using HotelAPI.Persistence.DbContexts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,7 +10,15 @@ public static class ServiceCollectionExtension
 {
     public static  IServiceCollection AddServiceRegistration(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.Scan(scan => scan.FromAssemblies(
+               typeof(IInfrastructureAssemblyMarker).Assembly).AddClasses(@class =>
+               @class.Where(type =>
+               !type.Name.StartsWith('I')
+               && type.Name.EndsWith("Repository")))
+               .UsingRegistrationStrategy(RegistrationStrategy.Skip)
+               .AsImplementedInterfaces()
+               .WithScopedLifetime());
+
         services.AddDbContext<HotelIdentityDbContext>(opt =>
         {
             opt.UseSqlServer(configuration.GetConnectionString("Default"));

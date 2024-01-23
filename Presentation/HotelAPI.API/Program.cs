@@ -1,4 +1,6 @@
-using HotelAPI.Application.Utilities.Extentions;
+
+
+using HotelAPI.Persistence.Utilities.Extentions;
 
 var builder = WebApplication.CreateBuilder(args);
 
