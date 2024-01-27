@@ -1,7 +1,4 @@
-﻿
-using HotelAPI.Domain.Entities.Identity;
-
-namespace HotelAPI.Persistence.DbContexts;
+﻿namespace HotelAPI.Persistence.DbContexts;
 
 public class HotelIdentityDbContext : IdentityDbContext<AppUser>
 {
@@ -22,6 +19,7 @@ public class HotelIdentityDbContext : IdentityDbContext<AppUser>
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
+        builder.RegisterAllEntities<BaseEntity>(typeof(BaseEntity).Assembly);
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         base.OnModelCreating(builder);
     }

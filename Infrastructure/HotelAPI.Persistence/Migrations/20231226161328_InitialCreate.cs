@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace HotelAPI.Persistence.Migrations
+namespace HotelAPI.Infrastructure.Migrations
 {
     public partial class InitialCreate : Migration
     {

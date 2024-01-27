@@ -20,6 +20,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\HotelAPI.Application\HotelAPI.Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\HotelAPI.Infrastructure\HotelAPI.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\HotelAPI.Persistence\HotelAPI.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
