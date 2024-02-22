@@ -53,6 +53,7 @@ static class Messages
     public static string Country = "Country";
     public static string City = "City";
     public static string Equipment = "Equipment";
+    public static string RoomEquipment = "RoomEquipment";
     public static string Hotel = "Hotel";
     public static string Reservation = "Reservation";
     public static string Reservator = "Reservator";
@@ -61,5 +62,6 @@ static class Messages
     public static string RoomType = "RoomType";
     public static string Service = "Service";
     public static string ServiceType = "ServiceType";
+    public static string Role = "Role";
     #endregion
 }

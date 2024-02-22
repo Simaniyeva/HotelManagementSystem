@@ -1,6 +1,8 @@
-﻿namespace HotelAPI.Application.DTOs.RoomTypeDtos;
+﻿using HotelAPI.Application.Utilities.Profiles;
 
-public class RoomTypePostDto : IDto
+namespace HotelAPI.Application.DTOs.RoomTypeDtos;
+
+public class RoomTypePostDto : IDto, IMapTo<RoomType>
 {
     public string Name { get; set; }
     public string Description { get; set; }

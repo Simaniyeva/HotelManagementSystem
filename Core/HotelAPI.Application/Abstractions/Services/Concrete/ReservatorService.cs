@@ -18,14 +18,14 @@ public class ReservatorService : IReservatorService
 
     public async Task<IDataResult<List<ReservatorGetDto>>> GetAllAsync(bool getDeleted, params string[] includes)
     {
-        List<Reservator> cities = getDeleted
+        List<Reservator> reservators = getDeleted
             ? await _reservatorReadRepository.GetAllAsync(includes: includes)
             : await _reservatorReadRepository.GetAllAsync(c => c.entityStatus == EntityStatus.Active, includes);
-        if (cities is null)
+        if (reservators is null)
         {
             return new ErrorDataResult<List<ReservatorGetDto>>(Messages.NotFound(Messages.Reservator));
         }
-        return new SuccessDataResult<List<ReservatorGetDto>>(_mapper.Map<List<ReservatorGetDto>>(cities));
+        return new SuccessDataResult<List<ReservatorGetDto>>(_mapper.Map<List<ReservatorGetDto>>(reservators));
     }
 
     public async Task<IDataResult<ReservatorGetDto>> GetByIdAsync(int id, params string[] includes)

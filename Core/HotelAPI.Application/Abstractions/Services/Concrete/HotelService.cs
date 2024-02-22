@@ -16,14 +16,14 @@ public class HotelService : IHotelService
 
     public async Task<IDataResult<List<HotelGetDto>>> GetAllAsync(bool getDeleted, params string[] includes)
     {
-        List<Hotel> cities = getDeleted
+        List<Hotel> hotels = getDeleted
             ? await _hotelReadRepository.GetAllAsync(includes: includes)
             : await _hotelReadRepository.GetAllAsync(c => c.entityStatus == EntityStatus.Active, includes);
-        if (cities is null)
+        if (hotels is null)
         {
             return new ErrorDataResult<List<HotelGetDto>>(Messages.NotFound(Messages.Hotel));
         }
-        return new SuccessDataResult<List<HotelGetDto>>(_mapper.Map<List<HotelGetDto>>(cities));
+        return new SuccessDataResult<List<HotelGetDto>>(_mapper.Map<List<HotelGetDto>>(hotels));
     }
 
     public async Task<IDataResult<HotelGetDto>> GetByIdAsync(int id, params string[] includes)

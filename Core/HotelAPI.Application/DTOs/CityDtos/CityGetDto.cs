@@ -1,6 +1,6 @@
-﻿using HotelAPI.Domain.DTOs.CountryDtos;
+﻿using HotelAPI.Application.Utilities.Profiles;
 
-namespace HotelAPI.Domain.DTOs.CityDtos;
+namespace HotelAPI.Application.DTOs.CityDtos;
 
 public class CityGetDto:IDto
 {

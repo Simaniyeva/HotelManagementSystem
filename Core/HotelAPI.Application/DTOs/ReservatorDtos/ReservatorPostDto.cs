@@ -1,6 +1,8 @@
-﻿namespace HotelAPI.Domain.DTOs.ReservatorDtos;
+﻿using HotelAPI.Application.Utilities.Profiles;
 
-public class ReservatorPostDto: IDto
+namespace HotelAPI.Application.DTOs.ReservatorDtos;
+
+public class ReservatorPostDto: IDto, IMapTo<Reservator>
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }

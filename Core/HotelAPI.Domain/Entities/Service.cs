@@ -9,5 +9,5 @@ public class Service:BaseEntity, IEntityBase
 
     //Relations
     public int ServiceTypeId { get; set; }
-    public ServiceType ServiceType { get; set; }
+    public virtual ServiceType ServiceType { get; set; }
 }

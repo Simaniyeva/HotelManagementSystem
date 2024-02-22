@@ -1,6 +1,8 @@
-﻿namespace HotelAPI.Domain.DTOs.CountryDtos;
+﻿using HotelAPI.Application.Utilities.Profiles;
 
-public class CountryUpdateDto : IDto
+namespace HotelAPI.Application.DTOs.CountryDtos;
+
+public class CountryUpdateDto : IDto, IMapTo<Country>
 {
     public int Id { get; set; }
     public string Name { get; set; }

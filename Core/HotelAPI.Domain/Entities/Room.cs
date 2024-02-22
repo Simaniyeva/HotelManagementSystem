@@ -8,7 +8,6 @@ public class Room:BaseEntity, IEntityBase
     public double Price { get; set; }
     public string Description { get; set; }
     public RoomState RoomState { get; set; } = RoomState.Available;
-    public List<Equipment> Equipments { get; set; }
 
     //Relations
     public int RoomTypeId { get; set; }
@@ -16,6 +15,13 @@ public class Room:BaseEntity, IEntityBase
     public int HotelId { get; set; }
     public Hotel Hotel { get; set; }
     public List<Reservation>Reservations { get; set; }
+    public List<RoomEquipment> RoomEquipments { get; set; }
+
+    public Room()
+    {
+        RoomEquipments = new List<RoomEquipment>();
+    }
 
 
 }
+

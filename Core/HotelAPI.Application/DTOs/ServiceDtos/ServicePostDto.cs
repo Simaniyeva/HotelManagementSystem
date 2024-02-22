@@ -1,6 +1,8 @@
-﻿namespace HotelAPI.Application.DTOs.ServiceDtos;
+﻿using HotelAPI.Application.Utilities.Profiles;
 
-public class ServicePostDto : IDto
+namespace HotelAPI.Application.DTOs.ServiceDtos;
+
+public class ServicePostDto : IDto, IMapTo<Service>
 {
     public string Description { get; set; }
     public string AvailabilitySchedule { get; set; }

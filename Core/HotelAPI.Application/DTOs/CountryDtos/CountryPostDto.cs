@@ -1,6 +1,8 @@
-﻿namespace HotelAPI.Domain.DTOs.CountryDtos;
+﻿using HotelAPI.Application.Utilities.Profiles;
 
-public class CountryPostDto : IDto
+namespace HotelAPI.Application.DTOs.CountryDtos;
+
+public class CountryPostDto : IDto, IMapTo<Country>
 {
     public string Name { get; set; }
     public string Continent { get; set; }

@@ -18,14 +18,14 @@ public class ServiceService : IServiceService
 
     public async Task<IDataResult<List<ServiceGetDto>>> GetAllAsync(bool getDeleted, params string[] includes)
     {
-        List<Service> cities = getDeleted
+        List<Service> services = getDeleted
             ? await _serviceReadRepository.GetAllAsync(includes: includes)
             : await _serviceReadRepository.GetAllAsync(c => c.entityStatus == EntityStatus.Active, includes);
-        if (cities is null)
+        if (services is null)
         {
             return new ErrorDataResult<List<ServiceGetDto>>(Messages.NotFound(Messages.Service));
         }
-        return new SuccessDataResult<List<ServiceGetDto>>(_mapper.Map<List<ServiceGetDto>>(cities));
+        return new SuccessDataResult<List<ServiceGetDto>>(_mapper.Map<List<ServiceGetDto>>(services));
     }
 
     public async Task<IDataResult<ServiceGetDto>> GetByIdAsync(int id, params string[] includes)

@@ -1,6 +1,8 @@
-﻿namespace HotelAPI.Application.DTOs.ServiceTypeDtos;
+﻿using HotelAPI.Application.Utilities.Profiles;
 
-public class ServiceTypeUpdateDto : IDto
+namespace HotelAPI.Application.DTOs.ServiceTypeDtos;
+
+public class ServiceTypeUpdateDto : IDto, IMapTo<ServiceType>
 {
     public int Id { get; set; }
     public string Name { get; set; }

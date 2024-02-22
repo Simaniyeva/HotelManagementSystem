@@ -20,7 +20,7 @@ public class CityService : ICityService
     {
         List<City> cities = getDeleted
             ? await _cityReadRepository.GetAllAsync(includes: includes)
-            : await _cityReadRepository.GetAllAsync(c => c.entityStatus == EntityStatus.Active, includes);
+            : await _cityReadRepository.GetAllAsync(c => c.entityStatus == EntityStatus.Active);
         if (cities is null)
         {
             return new ErrorDataResult<List<CityGetDto>>(Messages.NotFound(Messages.City));
@@ -44,14 +44,15 @@ public class CityService : ICityService
     #region Post Requests
     public async Task<IResult> CreateAsync(CityPostDto dto)
     {
+        
         City city = _mapper.Map<City>(dto);
         await _cityWriteRepository.CreateAsync(city);
         int result = await _cityWriteRepository.SaveAsync();
         if (result is 0)
         {
-            return new ErrorDataResult<CityGetDto>(Messages.NotFound(Messages.City));
+            return new ErrorDataResult<CityPostDto>(Messages.NotFound(Messages.City));
         }
-        return new SuccessDataResult<CityGetDto>(_mapper.Map<CityGetDto>(city));
+        return new SuccessDataResult<CityPostDto>(_mapper.Map<CityPostDto>(city));
     }
 
     #endregion

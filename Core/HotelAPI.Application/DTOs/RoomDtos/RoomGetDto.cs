@@ -1,5 +1,7 @@
 ﻿
-namespace HotelAPI.Domain.DTOs.RoomDtos;
+using HotelAPI.Application.DTOs.RoomEquipmentDtos;
+
+namespace HotelAPI.Application.DTOs.RoomDtos;
 
 public class RoomGetDto:IDto
 {
@@ -16,4 +18,5 @@ public class RoomGetDto:IDto
     public RoomTypeGetDto RoomType { get; set; }
     public HotelGetDto Hotel { get; set; }
     public List<ReservationGetDto> Reservations { get; set; }
+    public List<RoomEquipmentGetDto>RoomEquipments { get; set; }=  new List<RoomEquipmentGetDto>();
 }

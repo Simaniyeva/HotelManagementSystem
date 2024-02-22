@@ -7,11 +7,11 @@ public class Result : IResult
         Success = success;
 
     }
-    public Result(bool success, string message) : this(success)
+    public Result(bool success, params string[] message) : this(success)
     {
         Message = message;
 
     }
     public bool Success { get; }
-    public string Message { get; }
+    public IEnumerable<string> Message { get; }
 }

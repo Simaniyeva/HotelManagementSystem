@@ -1,4 +1,4 @@
-﻿namespace HotelAPI.Domain.DTOs.ReservatorDtos;
+﻿namespace HotelAPI.Application.DTOs.ReservatorDtos;
 
 public class ReservatorGetDto:IDto
 {

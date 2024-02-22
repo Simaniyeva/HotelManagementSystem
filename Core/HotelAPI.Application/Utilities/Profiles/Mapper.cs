@@ -1,7 +1,8 @@
-﻿using HotelAPI.Application.DTOs.ServiceTypeDtos;
+﻿using HotelAPI.Application.DTOs.RoomEquipmentDtos;
+
 namespace HotelAPI.Application.Utilities.Profiles;
 
-public class Mapper:Profile
+public class Mapper : Profile
 {
     public Mapper()
     {
@@ -13,10 +14,14 @@ public class Mapper:Profile
         CreateMap<CountryGetDto, CountryUpdateDto>();
 
         //City
-        CreateMap<City, CityGetDto>();
-        CreateMap<CityPostDto, City>();
+        CreateMap<City, CityGetDto>()
+            .ForMember(dest => dest.Country, opt => opt.MapFrom(src => src.Country)); ;
+        CreateMap<CityPostDto, City>()
+            .ForMember(dest => dest.CountryId, opt => opt.MapFrom(src => src.CountryId));
+        CreateMap<Country, CountryGetDto>();
         CreateMap<CityUpdateDto, City>()
-            .ForMember(x => x.CreatedDate, opt => opt.MapFrom(src => DateTime.UtcNow));
+            .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(src => DateTime.UtcNow));
+
         CreateMap<CityGetDto, CityUpdateDto>();
 
         //Equipment
@@ -25,6 +30,12 @@ public class Mapper:Profile
         CreateMap<EquipmentUpdateDto, Equipment>()
             .ForMember(x => x.CreatedDate, opt => opt.MapFrom(src => DateTime.UtcNow));
         CreateMap<EquipmentGetDto, EquipmentUpdateDto>();
+
+        //RoomEquipment
+        CreateMap<RoomEquipment, RoomEquipmentGetDto>();
+        CreateMap<RoomEquipmentPostDto, RoomEquipment>();
+        CreateMap<RoomEquipmentUpdateDto, RoomEquipment>();
+        CreateMap<RoomEquipmentGetDto, RoomEquipmentUpdateDto>();
 
         //Hotel
         CreateMap<Hotel, HotelGetDto>();
@@ -45,8 +56,8 @@ public class Mapper:Profile
         CreateMap<ReservatorPostDto, Reservator>();
         CreateMap<ReservatorUpdateDto, Reservator>()
             .ForMember(x => x.CreatedDate, opt => opt.MapFrom(src => DateTime.UtcNow));
-        CreateMap<ReservatorGetDto, ReservatorUpdateDto>();    
-        
+        CreateMap<ReservatorGetDto, ReservatorUpdateDto>();
+
         //Review
         CreateMap<Review, ReviewGetDto>();
         CreateMap<ReviewPostDto, Review>();
@@ -54,14 +65,14 @@ public class Mapper:Profile
             .ForMember(x => x.CreatedDate, opt => opt.MapFrom(src => DateTime.UtcNow));
         CreateMap<ReviewGetDto, ReviewUpdateDto>();
 
- 
+
         //Room
         CreateMap<Room, RoomGetDto>();
         CreateMap<RoomPostDto, Room>();
         CreateMap<RoomUpdateDto, Room>()
             .ForMember(x => x.CreatedDate, opt => opt.MapFrom(src => DateTime.UtcNow));
-        CreateMap<RoomGetDto, RoomUpdateDto>();  
-        
+        CreateMap<RoomGetDto, RoomUpdateDto>();
+
         //RoomType
         CreateMap<RoomType, RoomTypeGetDto>();
         CreateMap<RoomTypePostDto, RoomType>();
@@ -83,6 +94,19 @@ public class Mapper:Profile
         CreateMap<ServiceTypeUpdateDto, ServiceType>()
             .ForMember(x => x.CreatedDate, opt => opt.MapFrom(src => DateTime.UtcNow));
         CreateMap<ServiceTypeGetDto, ServiceTypeUpdateDto>();
+
+        //Auth
+        CreateMap<RegisterDto, AppUser>();
+        CreateMap<LoginDto, AppUser>();
+        CreateMap<AppUser, UserGetDto>().ReverseMap();
+        CreateMap<UserGetDto, AppUser >().ReverseMap();
+
+        //Role
+        CreateMap<IdentityRole, RoleGetDto>();
+        CreateMap<RolePostDto, IdentityRole>();
+        CreateMap<RoleUpdateDto, IdentityRole>();
+        CreateMap<RoleGetDto, RoleUpdateDto>();
+
 
 
     }

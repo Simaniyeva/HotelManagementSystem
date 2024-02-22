@@ -1,5 +1,5 @@
 ﻿
-namespace HotelAPI.Domain.DTOs.HotelDtos;
+namespace HotelAPI.Application.DTOs.HotelDtos;
 
 public class HotelGetDto:IDto
 {

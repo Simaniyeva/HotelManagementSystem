@@ -1,6 +1,8 @@
-﻿namespace HotelAPI.Domain.DTOs.HotelDtos;
+﻿using HotelAPI.Application.Utilities.Profiles;
 
-public class HotelUpdateDto : IDto
+namespace HotelAPI.Application.DTOs.HotelDtos;
+
+public class HotelUpdateDto : IDto, IMapTo<Hotel>
 {
     public int Id { get; set; }
     public string Name { get; set; }

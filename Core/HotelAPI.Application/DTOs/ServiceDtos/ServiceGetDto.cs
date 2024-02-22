@@ -6,5 +6,9 @@ public class ServiceGetDto:IDto
     public string Description { get; set; }
     public string AvailabilitySchedule { get; set; }
     public double Price { get; set; }
+
+    //Relations
+    public ServiceTypeGetDto ServiceType { get; set; }
+
 }
 

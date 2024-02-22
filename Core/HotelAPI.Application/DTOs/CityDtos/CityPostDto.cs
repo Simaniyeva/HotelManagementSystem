@@ -1,6 +1,8 @@
-﻿namespace HotelAPI.Domain.DTOs.CityDtos;
+﻿using HotelAPI.Application.Utilities.Profiles;
 
-public class CityPostDto : IDto
+namespace HotelAPI.Application.DTOs.CityDtos;
+
+public class CityPostDto :IDto , IMapTo<City>
 {
     public string Name { get; set; }
     public string PostalCode { get; set; }

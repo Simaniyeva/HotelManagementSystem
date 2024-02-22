@@ -13,7 +13,6 @@ public static class ConfigureServices
         {
             opt.UseSqlServer(configuration.GetConnectionString("Default"));
         });
-        services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<HotelIdentityDbContext>();
         return services;
     }
 }

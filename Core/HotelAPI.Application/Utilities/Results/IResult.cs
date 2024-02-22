@@ -3,5 +3,5 @@
 public interface IResult
 {
     public bool Success { get;  }
-    public string Message { get; }
+    public IEnumerable<string> Message { get; }
 }

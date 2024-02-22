@@ -1,6 +1,8 @@
-﻿namespace HotelAPI.Domain.DTOs.ReservationDtos;
+﻿using HotelAPI.Application.Utilities.Profiles;
 
-public class ReservationPostDto : IDto
+namespace HotelAPI.Application.DTOs.ReservationDtos;
+
+public class ReservationPostDto : IDto, IMapTo<Reservation>
 {
     public DateTime CheckInDate { get; set; }
     public DateTime CheckOutDate { get; set; }

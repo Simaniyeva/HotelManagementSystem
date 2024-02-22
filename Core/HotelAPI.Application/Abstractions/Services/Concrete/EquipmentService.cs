@@ -16,14 +16,14 @@ public class EquipmentService : IEquipmentService
 
     public async Task<IDataResult<List<EquipmentGetDto>>> GetAllAsync(bool getDeleted, params string[] includes)
     {
-        List<Equipment> cities = getDeleted
+        List<Equipment> equipments = getDeleted
             ? await _equipmentReadRepository.GetAllAsync(includes: includes)
             : await _equipmentReadRepository.GetAllAsync(c => c.entityStatus == EntityStatus.Active, includes);
-        if (cities is null)
+        if (equipments is null)
         {
             return new ErrorDataResult<List<EquipmentGetDto>>(Messages.NotFound(Messages.Equipment));
         }
-        return new SuccessDataResult<List<EquipmentGetDto>>(_mapper.Map<List<EquipmentGetDto>>(cities));
+        return new SuccessDataResult<List<EquipmentGetDto>>(_mapper.Map<List<EquipmentGetDto>>(equipments));
     }
 
     public async Task<IDataResult<EquipmentGetDto>> GetByIdAsync(int id, params string[] includes)

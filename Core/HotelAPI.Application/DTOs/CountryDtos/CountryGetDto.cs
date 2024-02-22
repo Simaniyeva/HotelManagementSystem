@@ -1,4 +1,4 @@
-﻿namespace HotelAPI.Domain.DTOs.CountryDtos;
+﻿namespace HotelAPI.Application.DTOs.CountryDtos;
 
 public class CountryGetDto:IDto
 {

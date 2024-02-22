@@ -1,8 +1,10 @@
-﻿namespace HotelAPI.Persistence.DbContexts;
+﻿using Microsoft.Extensions.Options;
+
+namespace HotelAPI.Persistence.DbContexts;
 
 public class HotelIdentityDbContext : IdentityDbContext<AppUser>
 {
-    public HotelIdentityDbContext(DbContextOptions<HotelIdentityDbContext> options) : base(options) { }
+    public HotelIdentityDbContext(DbContextOptions<HotelIdentityDbContext> options) : base(options) {}
 
     public DbSet<City> Cities { get; set; }
     public DbSet<Country> Countries { get; set; }
@@ -23,19 +25,19 @@ public class HotelIdentityDbContext : IdentityDbContext<AppUser>
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         base.OnModelCreating(builder);
     }
-    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-    {
-        //Entity üzərində edilən dəyişikliklər və ya yeni əlavə olunan datanı saxlayan propertydir.
-        var datas = ChangeTracker.Entries<BaseEntity>();
-        foreach (var data in datas)
-        {
-            _ = data.State switch
-            {
-                EntityState.Added => data.Entity.CreatedDate = DateTime.UtcNow,
-            };
-        }
+    //public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    //{
+    //    //Entity üzərində edilən dəyişikliklər və ya yeni əlavə olunan datanı saxlayan propertydir.
+    //    var datas = ChangeTracker.Entries<BaseEntity>();
+    //    foreach (var data in datas)
+    //    {
+    //        _ = data.State switch
+    //        {
+    //            EntityState.Added => data.Entity.CreatedDate = DateTime.UtcNow,
+    //        };
+    //    }
 
-        return await  base.SaveChangesAsync(cancellationToken);
-    }
+    //    return await  base.SaveChangesAsync(cancellationToken);
+    //}
 
 }

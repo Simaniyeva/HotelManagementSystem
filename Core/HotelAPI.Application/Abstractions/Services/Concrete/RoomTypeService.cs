@@ -18,14 +18,14 @@ public class RoomTypeService : IRoomTypeService
 
     public async Task<IDataResult<List<RoomTypeGetDto>>> GetAllAsync(bool getDeleted, params string[] includes)
     {
-        List<RoomType> cities = getDeleted
+        List<RoomType> roomtypes = getDeleted
             ? await _roomTypeReadRepository.GetAllAsync(includes: includes)
             : await _roomTypeReadRepository.GetAllAsync(c => c.entityStatus == EntityStatus.Active, includes);
-        if (cities is null)
+        if (roomtypes is null)
         {
             return new ErrorDataResult<List<RoomTypeGetDto>>(Messages.NotFound(Messages.RoomType));
         }
-        return new SuccessDataResult<List<RoomTypeGetDto>>(_mapper.Map<List<RoomTypeGetDto>>(cities));
+        return new SuccessDataResult<List<RoomTypeGetDto>>(_mapper.Map<List<RoomTypeGetDto>>(roomtypes));
     }
 
     public async Task<IDataResult<RoomTypeGetDto>> GetByIdAsync(int id, params string[] includes)

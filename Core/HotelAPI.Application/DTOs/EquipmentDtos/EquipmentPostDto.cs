@@ -1,6 +1,8 @@
-﻿namespace HotelAPI.Domain.DTOs.EquipmentDtos;
+﻿using HotelAPI.Application.Utilities.Profiles;
 
-public class EquipmentPostDto : IDto
+namespace HotelAPI.Application.DTOs.EquipmentDtos;
+
+public class EquipmentPostDto : IDto, IMapTo<Equipment>
 {
     public string Name { get; set; }
     public int Quantity { get; set; }

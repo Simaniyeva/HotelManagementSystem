@@ -7,6 +7,6 @@ public class City : BaseEntity,IEntityBase
 
     //Relations
     public int CountryId { get; set; }
-    public Country Country { get; set; }
-    public List<Hotel>Hotels { get; set; }
+    public virtual Country Country { get; set; }
+    public virtual List<Hotel>Hotels { get; set; }
 }

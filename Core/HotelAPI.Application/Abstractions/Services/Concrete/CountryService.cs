@@ -16,14 +16,14 @@ public class CountryService : ICountryService
 
     public async Task<IDataResult<List<CountryGetDto>>> GetAllAsync(bool getDeleted, params string[] includes)
     {
-        List<Country> cities = getDeleted
+        List<Country> countries = getDeleted
             ? await _countryReadRepository.GetAllAsync(includes: includes)
-            : await _countryReadRepository.GetAllAsync(c => c.entityStatus == EntityStatus.Active, includes);
-        if (cities is null)
+            : await _countryReadRepository.GetAllAsync(c => c.entityStatus == EntityStatus.Active);
+        if (countries is null)
         {
             return new ErrorDataResult<List<CountryGetDto>>(Messages.NotFound(Messages.Country));
         }
-        return new SuccessDataResult<List<CountryGetDto>>(_mapper.Map<List<CountryGetDto>>(cities));
+        return new SuccessDataResult<List<CountryGetDto>>(_mapper.Map<List<CountryGetDto>>(countries));
     }
 
     public async Task<IDataResult<CountryGetDto>> GetByIdAsync(int id, params string[] includes)
@@ -86,7 +86,7 @@ public class CountryService : ICountryService
     #region Delete requests
     public async Task<IResult> HardDeleteByIdAsync(int id)
     {
-        Country Country = await _countryReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.Active);
+        Country Country = await _countryReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.InActive);
         _countryWriteRepository.Delete(Country);
         int result = await _countryWriteRepository.SaveAsync();
         if (result is 0)
@@ -98,8 +98,8 @@ public class CountryService : ICountryService
 
     public async Task<IResult> SoftDeleteByIdAsync(int id)
     {
-        Country Country = await _countryReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.InActive);
-        Country.entityStatus = EntityStatus.Active;
+        Country Country = await _countryReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.Active);
+        Country.entityStatus = EntityStatus.InActive;
         _countryWriteRepository.Update(Country);
         int result = await _countryWriteRepository.SaveAsync();
         if (result is 0)

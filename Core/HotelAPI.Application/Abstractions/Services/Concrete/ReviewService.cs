@@ -23,14 +23,14 @@ public class ReviewService : IReviewService
 
     public async Task<IDataResult<List<ReviewGetDto>>> GetAllAsync(bool getDeleted, params string[] includes)
     {
-        List<Review> cities = getDeleted
+        List<Review> reviews = getDeleted
             ? await _reviewReadRepository.GetAllAsync(includes: includes)
             : await _reviewReadRepository.GetAllAsync(c => c.entityStatus == EntityStatus.Active, includes);
-        if (cities is null)
+        if (reviews is null)
         {
             return new ErrorDataResult<List<ReviewGetDto>>(Messages.NotFound(Messages.Review));
         }
-        return new SuccessDataResult<List<ReviewGetDto>>(_mapper.Map<List<ReviewGetDto>>(cities));
+        return new SuccessDataResult<List<ReviewGetDto>>(_mapper.Map<List<ReviewGetDto>>(reviews));
     }
 
     public async Task<IDataResult<ReviewGetDto>> GetByIdAsync(int id, params string[] includes)

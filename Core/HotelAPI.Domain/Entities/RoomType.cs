@@ -6,6 +6,6 @@ public class RoomType:BaseEntity, IEntityBase
     public string Description { get; set; }
 
     //Relations
-    public List<Room>Rooms { get; set; }
+    public virtual List<Room>Rooms { get; set; }
 
 }
