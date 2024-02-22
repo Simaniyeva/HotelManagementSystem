@@ -1,8 +1,8 @@
 ﻿namespace HotelAPI.Application.Utilities.Validations.FluentValidation.PostDtoValidators;
 
-public class CountryPostDtoValidator : AbstractValidator<CountryPostDto>
+public class CountryUpdateDtoValidator : AbstractValidator<CountryPostDto>
 {
-    public CountryPostDtoValidator()
+    public CountryUpdateDtoValidator()
     {
         RuleFor(c => c.Name)
             .NotEmpty()

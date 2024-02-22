@@ -1,8 +1,8 @@
 ﻿namespace HotelAPI.Application.Utilities.Validations.FluentValidation.PostDtoValidators;
 
-public class HotelPostDtoValidator : AbstractValidator<HotelPostDto>
+public class HotelUpdateDtoValidator : AbstractValidator<HotelPostDto>
 {
-    public HotelPostDtoValidator()
+    public HotelUpdateDtoValidator()
     {
         RuleFor(c => c.Name)
             .NotEmpty()

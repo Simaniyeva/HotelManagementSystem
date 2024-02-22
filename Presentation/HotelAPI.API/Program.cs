@@ -1,3 +1,4 @@
+using HotelAPI.Application.Helpers;
 using HotelAPI.Domain.Entities.Identity;
 using HotelAPI.Infrastructure.Utilities.Extentions;
 using HotelAPI.Persistence.DbContexts;
@@ -19,9 +20,8 @@ builder.Services.AddControllers().ConfigureApiBehaviorOptions(options =>
     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 }); ;
 
-
-builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+
 
 //builder.Services.Configure<TokenOptions>(builder.Configuration.GetSection("TokenOptions"));
 //TokenOptions tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
@@ -70,6 +70,8 @@ builder.Services.AddIdentity<AppUser,IdentityRole>(options =>
     options.Password.RequireDigit = false;
     options.Lockout.MaxFailedAccessAttempts = 5;
 }).AddDefaultTokenProviders().AddEntityFrameworkStores<HotelIdentityDbContext>();
+builder.Services.Configure<FileServerPath>(builder.Configuration.GetSection("FileServerPath"));
+FileServerPath filePath = builder.Configuration.GetSection("FileServerPath").Get<FileServerPath>();
 var app = builder.Build();
 
 

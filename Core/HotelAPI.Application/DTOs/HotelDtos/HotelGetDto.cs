@@ -16,4 +16,6 @@ public class HotelGetDto:IDto
     public CityGetDto City { get; set; }
     public List<ReviewGetDto> Reviews { get; set; }
     public List<RoomGetDto> Rooms { get; set; }
+    public List<HotelImage> HotelImages { get; set; }
+
 }

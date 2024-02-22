@@ -88,7 +88,7 @@ public class ReservationService : IReservationService
     #region Delete requests
     public async Task<IResult> HardDeleteByIdAsync(int id)
     {
-        Reservation Reservation = await _reservationReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.Active);
+        Reservation Reservation = await _reservationReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.InActive);
         _reservationWriteRepository.Delete(Reservation);
         int result = await _reservationWriteRepository.SaveAsync();
         if (result is 0)
@@ -100,8 +100,8 @@ public class ReservationService : IReservationService
 
     public async Task<IResult> SoftDeleteByIdAsync(int id)
     {
-        Reservation Reservation = await _reservationReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.InActive);
-        Reservation.entityStatus = EntityStatus.Active;
+        Reservation Reservation = await _reservationReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.Active);
+        Reservation.entityStatus = EntityStatus.InActive;
         _reservationWriteRepository.Update(Reservation);
         int result = await _reservationWriteRepository.SaveAsync();
         if (result is 0)

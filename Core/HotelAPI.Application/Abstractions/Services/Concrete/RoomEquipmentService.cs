@@ -92,7 +92,7 @@ public class RoomEquipmentService : IRoomEquipmentService
     #region Delete requests
     public async Task<IResult> HardDeleteByIdAsync(int id)
     {
-        RoomEquipment RoomEquipment = await _roomEquipmentReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.Active);
+        RoomEquipment RoomEquipment = await _roomEquipmentReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.InActive);
         _roomEquipmentWriteRepository.Delete(RoomEquipment);
         int result = await _roomEquipmentWriteRepository.SaveAsync();
         if (result is 0)
@@ -104,8 +104,8 @@ public class RoomEquipmentService : IRoomEquipmentService
 
     public async Task<IResult> SoftDeleteByIdAsync(int id)
     {
-        RoomEquipment RoomEquipment = await _roomEquipmentReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.InActive);
-        RoomEquipment.entityStatus = EntityStatus.Active;
+        RoomEquipment RoomEquipment = await _roomEquipmentReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.Active);
+        RoomEquipment.entityStatus = EntityStatus.InActive;
         _roomEquipmentWriteRepository.Update(RoomEquipment);
         int result = await _roomEquipmentWriteRepository.SaveAsync();
         if (result is 0)

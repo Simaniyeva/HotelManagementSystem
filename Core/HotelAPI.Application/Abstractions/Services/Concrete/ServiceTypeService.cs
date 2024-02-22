@@ -88,7 +88,7 @@ public class ServiceTypeService : IServiceTypeService
     #region Delete requests
     public async Task<IResult> HardDeleteByIdAsync(int id)
     {
-        ServiceType ServiceType = await _serviceTypeReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.Active);
+        ServiceType ServiceType = await _serviceTypeReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.InActive);
         _serviceTypeWriteRepository.Delete(ServiceType);
         int result = await _serviceTypeWriteRepository.SaveAsync();
         if (result is 0)
@@ -100,8 +100,8 @@ public class ServiceTypeService : IServiceTypeService
 
     public async Task<IResult> SoftDeleteByIdAsync(int id)
     {
-        ServiceType ServiceType = await _serviceTypeReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.InActive);
-        ServiceType.entityStatus = EntityStatus.Active;
+        ServiceType ServiceType = await _serviceTypeReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.Active);
+        ServiceType.entityStatus = EntityStatus.InActive;
         _serviceTypeWriteRepository.Update(ServiceType);
         int result = await _serviceTypeWriteRepository.SaveAsync();
         if (result is 0)

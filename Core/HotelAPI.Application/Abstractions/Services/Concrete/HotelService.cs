@@ -1,17 +1,33 @@
-﻿namespace HotelAPI.Application.Abstractions.Services.Concrete;
+﻿using HotelAPI.Application.Helpers;
+using HotelAPI.Domain.Repositories.HotelImageRepositories;
+using HotelAPI.Infrastructure.Repositories.Concretes.HotelRepositories;
+using HotelAPI.Infrastructure.Utilities.Extentions;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using System.Reflection.Metadata;
+using IResult = HotelAPI.Application.Utilities.Results.IResult;
+
+namespace HotelAPI.Application.Abstractions.Services.Concrete;
 
 public class HotelService : IHotelService
 {
+    private readonly IHotelImageReadRepository _hotelImageReadRepository;
+    private readonly IHotelImageWriteRepository _hotelImageWriteRepository;
     private readonly IHotelReadRepository _hotelReadRepository;
     private readonly IHotelWriteRepository _hotelWriteRepository;
+    private readonly IWebHostEnvironment _env;
     private readonly IMapper _mapper;
 
-    public HotelService(IHotelReadRepository HotelReadRepository, IHotelWriteRepository HotelWriteRepository, IMapper mapper)
+    public HotelService(IHotelImageReadRepository hotelImageReadRepository, IHotelImageWriteRepository hotelImageWriteRepository, IHotelReadRepository hotelReadRepository, IHotelWriteRepository hotelWriteRepository, IWebHostEnvironment env, IMapper mapper)
     {
-        _hotelReadRepository = HotelReadRepository;
-        _hotelWriteRepository = HotelWriteRepository;
+        _hotelImageReadRepository = hotelImageReadRepository;
+        _hotelImageWriteRepository = hotelImageWriteRepository;
+        _hotelReadRepository = hotelReadRepository;
+        _hotelWriteRepository = hotelWriteRepository;
+        _env = env;
         _mapper = mapper;
     }
+
     #region Get Requests
 
     public async Task<IDataResult<List<HotelGetDto>>> GetAllAsync(bool getDeleted, params string[] includes)
@@ -42,14 +58,20 @@ public class HotelService : IHotelService
     #region Post Requests
     public async Task<IResult> CreateAsync(HotelPostDto dto)
     {
-        Hotel Hotel = _mapper.Map<Hotel>(dto);
-        await _hotelWriteRepository.CreateAsync(Hotel);
+
+        foreach (var image in dto.HotelImages)
+        {
+            byte[] bytes = Convert.FromBase64String(image.FileBase64);
+            image.FileName = FileHelper.SavePhotoToFtp(bytes, image.FileName);
+        }
+        Hotel hotel = _mapper.Map<Hotel>(dto);
+        await _hotelWriteRepository.CreateAsync(hotel);
         int result = await _hotelWriteRepository.SaveAsync();
         if (result is 0)
         {
             return new ErrorDataResult<HotelGetDto>(Messages.NotFound(Messages.Hotel));
         }
-        return new SuccessDataResult<HotelGetDto>(_mapper.Map<HotelGetDto>(Hotel));
+        return new SuccessDataResult<HotelGetDto>(_mapper.Map<HotelGetDto>(hotel));
     }
 
     #endregion
@@ -57,9 +79,14 @@ public class HotelService : IHotelService
     #region Update Requests
     public async Task<IResult> UpdateAsync(HotelUpdateDto dto)
     {
-        Hotel Hotel = await _hotelReadRepository.GetAsync(c => c.Id == dto.Id && c.entityStatus == EntityStatus.Active);
-        Hotel = _mapper.Map<Hotel>(dto);
-        _hotelWriteRepository.Update(Hotel);
+        //Hotel hotel = await _hotelReadRepository.GetAsync(c => c.Id == dto.Id && c.entityStatus == EntityStatus.Active,"HotelImages","Reviews");
+        foreach (var image in dto.HotelImages)
+        {
+            byte[] bytes = Convert.FromBase64String(image.FileBase64);
+            image.FileName = FileHelper.SavePhotoToFtp(bytes, image.FileName);
+        }
+        Hotel hotel = _mapper.Map<Hotel>(dto);
+         _hotelWriteRepository.Update(hotel);
         int result = await _hotelWriteRepository.SaveAsync();
         if (result is 0)
         {
@@ -86,7 +113,7 @@ public class HotelService : IHotelService
     #region Delete requests
     public async Task<IResult> HardDeleteByIdAsync(int id)
     {
-        Hotel Hotel = await _hotelReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.Active);
+        Hotel Hotel = await _hotelReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.InActive);
         _hotelWriteRepository.Delete(Hotel);
         int result = await _hotelWriteRepository.SaveAsync();
         if (result is 0)
@@ -98,8 +125,8 @@ public class HotelService : IHotelService
 
     public async Task<IResult> SoftDeleteByIdAsync(int id)
     {
-        Hotel Hotel = await _hotelReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.InActive);
-        Hotel.entityStatus = EntityStatus.Active;
+        Hotel Hotel = await _hotelReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.Active);
+        Hotel.entityStatus = EntityStatus.InActive;
         _hotelWriteRepository.Update(Hotel);
         int result = await _hotelWriteRepository.SaveAsync();
         if (result is 0)
@@ -109,6 +136,31 @@ public class HotelService : IHotelService
         return new SuccessResult(Messages.Deleted(Messages.Hotel));
     }
     #endregion
+
+    //#region Private Methods
+    //private async void FillHotel(Hotel hotel, List<IFormFile> files)
+    //{
+    //    if (files is not null)
+    //    {
+    //        AddHotelImages(hotel, files);
+    //    }
+
+    //}
+    //private async void AddHotelImages(Hotel hotel, List<IFormFile> files)
+    //{
+    //    foreach (IFormFile file in files)
+    //    {
+    //        HotelImage image = new()
+    //        {
+    //            Hotel = hotel,
+    //            ImagePath = file.FileCreate(_env.WebRootPath, "uploads/hotel")
+    //        };
+    //        hotel.HotelImages.Add(image);
+    //    }
+    //}
+
+
+    //#endregion
 
 
 }

@@ -32,10 +32,6 @@ public class CountryController : ControllerBase
     [HttpPost("AddCountry")]
     public async Task<IActionResult> AddCountry(CountryPostDto dto)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(dto);
-        }
         IResult result = await _countryService.CreateAsync(dto);
         return Ok(result);
     }

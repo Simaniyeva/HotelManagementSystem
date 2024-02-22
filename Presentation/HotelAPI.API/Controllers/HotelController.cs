@@ -32,10 +32,6 @@ public class HotelController : ControllerBase
     [HttpPost("AddHotel")]
     public async Task<IActionResult> AddHotel(HotelPostDto dto)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(dto);
-        }
         IResult result = await _hotelService.CreateAsync(dto);
         return Ok(result);
     }
@@ -47,7 +43,7 @@ public class HotelController : ControllerBase
         return Ok();
     }
     [HttpPost("Delete")]
-    public async Task<IActionResult> Delete(int id)
+    public async Task<IActionResult> SoftDelete(int id)
     {
         HotelGetDto result = (await _hotelService.GetByIdAsync(id)).Data;
         if (result == null) { return BadRequest(); }

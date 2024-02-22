@@ -30,10 +30,6 @@ public class ReviewController : ControllerBase
     [HttpPost("AddReview")]
     public async Task<IActionResult> AddReview(ReviewPostDto dto)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(dto);
-        }
         IResult result = await _reviewService.CreateAsync(dto);
         return Ok(result);
     }

@@ -34,10 +34,6 @@ public class CityController : ControllerBase
     [HttpPost("AddCity")]
     public async Task<IActionResult> AddCity(CityPostDto dto)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(dto);
-        }
         IResult result = await _cityService.CreateAsync(dto);
         return Ok(result);
     }

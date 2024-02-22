@@ -89,7 +89,7 @@ public class CityService : ICityService
     #region Delete requests
     public async Task<IResult> HardDeleteByIdAsync(int id)
     {
-        City city = await _cityReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.Active);
+        City city = await _cityReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.InActive);
         _cityWriteRepository.Delete(city);
         int result = await _cityWriteRepository.SaveAsync();
         if (result is 0)
@@ -101,8 +101,8 @@ public class CityService : ICityService
 
     public async Task<IResult> SoftDeleteByIdAsync(int id)
     {
-        City city = await _cityReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.InActive);
-        city.entityStatus = EntityStatus.Active;
+        City city = await _cityReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.Active);
+        city.entityStatus = EntityStatus.InActive;
         _cityWriteRepository.Update(city);
         int result = await _cityWriteRepository.SaveAsync();
         if (result is 0)

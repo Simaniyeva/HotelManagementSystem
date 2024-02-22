@@ -36,10 +36,6 @@ public class RoomController : ControllerBase
     public async Task<IActionResult> AddRoom(RoomPostDto dto)
     {
         IDataResult<List<EquipmentGetDto>> equipments = await _equipmentService.GetAllAsync(false);
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(dto);
-        }
         IResult result = await _roomService.CreateAsync(dto);
         return Ok(result);
     }

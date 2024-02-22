@@ -33,10 +33,6 @@ public class RoleController : Controller
     [HttpPost("AddRole")]
     public async Task<IActionResult> AddRole(RolePostDto dto)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(dto);
-        }
         IResult result = await _roleService.CreateAsync(dto);
         return Ok(result);
     }

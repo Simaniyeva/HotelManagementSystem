@@ -10,14 +10,13 @@ public static class Includes
     public static readonly string[] CityIncludes = {
     "Country",
     "Hotels",
-    "Hotels.Reviews",
-    "Hotels.Rooms",
     };
     public static readonly string[] HotelIncludes = {
     "City",
     "City.Country",
     "Reviews",
     "Rooms",
+    "HotelImages"
     };
     public static readonly string[] ReservationIncludes = {
     "Room",

@@ -86,7 +86,7 @@ public class EquipmentService : IEquipmentService
     #region Delete requests
     public async Task<IResult> HardDeleteByIdAsync(int id)
     {
-        Equipment Equipment = await _equipmentReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.Active);
+        Equipment Equipment = await _equipmentReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.InActive);
         _equipmentWriteRepository.Delete(Equipment);
         int result = await _equipmentWriteRepository.SaveAsync();
         if (result is 0)
@@ -98,8 +98,8 @@ public class EquipmentService : IEquipmentService
 
     public async Task<IResult> SoftDeleteByIdAsync(int id)
     {
-        Equipment Equipment = await _equipmentReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.InActive);
-        Equipment.entityStatus = EntityStatus.Active;
+        Equipment Equipment = await _equipmentReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.Active);
+        Equipment.entityStatus = EntityStatus.InActive;
         _equipmentWriteRepository.Update(Equipment);
         int result = await _equipmentWriteRepository.SaveAsync();
         if (result is 0)

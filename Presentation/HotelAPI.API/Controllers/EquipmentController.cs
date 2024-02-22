@@ -33,10 +33,6 @@ public class EquipmentController : ControllerBase
     [HttpPost("AddEquipment")]
     public async Task<IActionResult> AddEquipment(EquipmentPostDto dto)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(dto);
-        }
         IResult result = await _equipmentService.CreateAsync(dto);
         return Ok(result);
     }

@@ -104,7 +104,7 @@ public class RoomService : IRoomService
     #region Delete requests
     public async Task<IResult> HardDeleteByIdAsync(int id)
     {
-        Room Room = await _roomReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.Active);
+        Room Room = await _roomReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.InActive);
         _roomWriteRepository.Delete(Room);
         int result = await _roomWriteRepository.SaveAsync();
         if (result is 0)
@@ -116,8 +116,8 @@ public class RoomService : IRoomService
 
     public async Task<IResult> SoftDeleteByIdAsync(int id)
     {
-        Room Room = await _roomReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.InActive);
-        Room.entityStatus = EntityStatus.Active;
+        Room Room = await _roomReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.Active);
+        Room.entityStatus = EntityStatus.InActive;
         _roomWriteRepository.Update(Room);
         int result = await _roomWriteRepository.SaveAsync();
         if (result is 0)

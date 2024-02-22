@@ -32,10 +32,6 @@ public class ServiceTypeController : ControllerBase
     [HttpPost("AddServiceType")]
     public async Task<IActionResult> AddServiceType(ServiceTypePostDto dto)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(dto);
-        }
         IResult result = await _serviceTypeService.CreateAsync(dto);
         return Ok(result);
     }

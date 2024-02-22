@@ -1,7 +1,9 @@
-﻿using HotelAPI.Application.Utilities.Security.Encryption;
+﻿using FluentValidation.AspNetCore;
+using HotelAPI.Application.Utilities.Security.Encryption;
 using HotelAPI.Application.Utilities.Security.JWT;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
@@ -15,6 +17,13 @@ public static class ConfigureServices
     {
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+        services.AddControllers().AddFluentValidation(opt =>
+        {
+            opt.ImplicitlyValidateChildProperties = true;
+            opt.ImplicitlyValidateRootCollectionElements = true;
+            opt.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+        });
+
         //    services.AddAuthentication(opt =>
         //    {
         //        opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -35,7 +44,7 @@ public static class ConfigureServices
         //        };
         //    });
         // ;
-        //    services.AddAuthorization();
+        services.AddAuthorization();
         //    services.AddAuthentication();
         services.AddScoped<ITokenHelper, JWTHelper>();
         //Token.TokenOptions tokenOptions = configuration.GetSection("TokenOptions").Get<Token.TokenOptions>();

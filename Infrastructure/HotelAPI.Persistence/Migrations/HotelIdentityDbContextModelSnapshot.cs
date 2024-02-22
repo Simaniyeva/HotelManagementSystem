@@ -177,6 +177,40 @@ namespace HotelAPI.Infrastructure.Migrations
                     b.ToTable("Hotels");
                 });
 
+            modelBuilder.Entity("HotelAPI.Domain.Entities.HotelImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETUTCDATE()");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("HotelId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("entityStatus")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HotelId");
+
+                    b.ToTable("HotelImage");
+                });
+
             modelBuilder.Entity("HotelAPI.Domain.Entities.Identity.AppUser", b =>
                 {
                     b.Property<string>("Id")
@@ -716,6 +750,17 @@ namespace HotelAPI.Infrastructure.Migrations
                     b.Navigation("City");
                 });
 
+            modelBuilder.Entity("HotelAPI.Domain.Entities.HotelImage", b =>
+                {
+                    b.HasOne("HotelAPI.Domain.Entities.Hotel", "Hotel")
+                        .WithMany("HotelImages")
+                        .HasForeignKey("HotelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Hotel");
+                });
+
             modelBuilder.Entity("HotelAPI.Domain.Entities.Reservation", b =>
                 {
                     b.HasOne("HotelAPI.Domain.Entities.Reservator", "Reservator")
@@ -871,6 +916,8 @@ namespace HotelAPI.Infrastructure.Migrations
 
             modelBuilder.Entity("HotelAPI.Domain.Entities.Hotel", b =>
                 {
+                    b.Navigation("HotelImages");
+
                     b.Navigation("Reviews");
 
                     b.Navigation("Rooms");

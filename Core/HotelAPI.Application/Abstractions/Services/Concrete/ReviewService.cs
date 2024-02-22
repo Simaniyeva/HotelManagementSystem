@@ -1,4 +1,6 @@
-﻿namespace HotelAPI.Application.Abstractions.Services.Concrete;
+﻿using HotelAPI.Domain.Repositories.HotelImageRepositories;
+
+namespace HotelAPI.Application.Abstractions.Services.Concrete;
 public class ReviewService : IReviewService
 {
     private readonly IReviewReadRepository _reviewReadRepository;
@@ -99,7 +101,7 @@ public class ReviewService : IReviewService
     #region Delete requests
     public async Task<IResult> HardDeleteByIdAsync(int id)
     {
-        Review Review = await _reviewReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.Active);
+        Review Review = await _reviewReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.InActive);
         _reviewWriteRepository.Delete(Review);
         int result = await _reviewWriteRepository.SaveAsync();
         if (result is 0)
@@ -111,8 +113,8 @@ public class ReviewService : IReviewService
 
     public async Task<IResult> SoftDeleteByIdAsync(int id)
     {
-        Review Review = await _reviewReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.InActive);
-        Review.entityStatus = EntityStatus.Active;
+        Review Review = await _reviewReadRepository.GetAsync(c => c.Id == id && c.entityStatus == EntityStatus.Active);
+        Review.entityStatus = EntityStatus.InActive;
         _reviewWriteRepository.Update(Review);
         int result = await _reviewWriteRepository.SaveAsync();
         if (result is 0)

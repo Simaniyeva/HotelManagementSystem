@@ -14,5 +14,7 @@ public class Hotel:BaseEntity, IEntityBase
     public City City { get; set; }
     public List<Review>Reviews { get; set; }
     public List<Room>Rooms { get; set; }
+    public List<HotelImage> HotelImages { get; set; }
+
 
 }

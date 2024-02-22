@@ -1,4 +1,6 @@
-﻿using HotelAPI.Application.Utilities.Profiles;
+﻿using HotelAPI.Application.DTOs.HotelImageDtos;
+using HotelAPI.Application.Utilities.Profiles;
+using Microsoft.AspNetCore.Http;
 
 namespace HotelAPI.Application.DTOs.HotelDtos;
 
@@ -15,4 +17,6 @@ public class HotelUpdateDto : IDto, IMapTo<Hotel>
 
     //Relations
     public int CityId { get; set; }
+    public List<HotelImagePostDto> HotelImages { get; set; }
+
 }

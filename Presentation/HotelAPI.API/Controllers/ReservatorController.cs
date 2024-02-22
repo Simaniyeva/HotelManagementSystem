@@ -31,10 +31,6 @@ public class ReservatorController : ControllerBase
     [HttpPost("AddReservator")]
     public async Task<IActionResult> AddReservator(ReservatorPostDto dto)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(dto);
-        }
         IResult result = await _reservatorService.CreateAsync(dto);
         return Ok(result);
     }

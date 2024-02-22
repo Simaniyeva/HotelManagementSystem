@@ -32,10 +32,6 @@ public class RoomTypeController : ControllerBase
     [HttpPost("AddRoomType")]
     public async Task<IActionResult> AddRoomType(RoomTypePostDto dto)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(dto);
-        }
         IResult result = await _roomTypeService.CreateAsync(dto);
         return Ok(result);
     }
