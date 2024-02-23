@@ -15,16 +15,14 @@ public class HotelService : IHotelService
     private readonly IHotelImageWriteRepository _hotelImageWriteRepository;
     private readonly IHotelReadRepository _hotelReadRepository;
     private readonly IHotelWriteRepository _hotelWriteRepository;
-    private readonly IWebHostEnvironment _env;
     private readonly IMapper _mapper;
 
-    public HotelService(IHotelImageReadRepository hotelImageReadRepository, IHotelImageWriteRepository hotelImageWriteRepository, IHotelReadRepository hotelReadRepository, IHotelWriteRepository hotelWriteRepository, IWebHostEnvironment env, IMapper mapper)
+    public HotelService(IHotelImageReadRepository hotelImageReadRepository, IHotelImageWriteRepository hotelImageWriteRepository, IHotelReadRepository hotelReadRepository, IHotelWriteRepository hotelWriteRepository,IMapper mapper)
     {
         _hotelImageReadRepository = hotelImageReadRepository;
         _hotelImageWriteRepository = hotelImageWriteRepository;
         _hotelReadRepository = hotelReadRepository;
         _hotelWriteRepository = hotelWriteRepository;
-        _env = env;
         _mapper = mapper;
     }
 

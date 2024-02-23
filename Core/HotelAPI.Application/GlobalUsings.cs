@@ -36,6 +36,11 @@ global using HotelAPI.Domain.Entities.Identity;
 global using Microsoft.AspNetCore.Identity;
 global using FluentValidation;
 global using System.Text.RegularExpressions;
+global using HotelAPI.Application.Helpers;
+global using System.Text.Json.Serialization;
+global using HotelAPI.Application.Utilities.Profiles;
+global using HotelAPI.Application.DTOs.RoomImageDtos;
+global using HotelAPI.Application.DTOs.RoomEquipmentDtos;
 
 
 

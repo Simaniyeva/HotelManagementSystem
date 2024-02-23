@@ -8,16 +8,14 @@ public class RoomService : IRoomService
 {
     private readonly IRoomReadRepository _roomReadRepository;
     private readonly IRoomWriteRepository _roomWriteRepository;
-    private readonly IRoomEquipmentReadRepository _roomEquipmentReadRepository;
     private readonly IRoomEquipmentWriteRepository _roomEquipmentWriteRepository;
     private readonly IMapper _mapper;
 
-    public RoomService(IRoomReadRepository RoomReadRepository, IRoomWriteRepository RoomWriteRepository, IMapper mapper, IRoomEquipmentReadRepository roomEquipmentReadRepository, IRoomEquipmentWriteRepository roomEquipmentWriteRepository)
+    public RoomService(IRoomReadRepository RoomReadRepository, IRoomWriteRepository RoomWriteRepository, IMapper mapper, IRoomEquipmentWriteRepository roomEquipmentWriteRepository)
     {
         _roomReadRepository = RoomReadRepository;
         _roomWriteRepository = RoomWriteRepository;
         _mapper = mapper;
-        _roomEquipmentReadRepository = roomEquipmentReadRepository;
         _roomEquipmentWriteRepository = roomEquipmentWriteRepository;
     }
     #region Get Requests
@@ -51,6 +49,11 @@ public class RoomService : IRoomService
     public async Task<IResult> CreateAsync(RoomPostDto dto)
     {
         Room room = _mapper.Map<Room>(dto);
+        foreach (var image in dto.RoomImages)
+        {
+            byte[] bytes = Convert.FromBase64String(image.FileBase64);
+            image.FileName = FileHelper.SavePhotoToFtp(bytes, image.FileName);
+        }
         FillRoom(room, dto.EquipmentIds);
         await _roomWriteRepository.CreateAsync(room);
         int result = await _roomWriteRepository.SaveAsync();
@@ -66,7 +69,7 @@ public class RoomService : IRoomService
     #region Update Requests
     public async Task<IResult> UpdateAsync(RoomUpdateDto dto)
     {
-        Room room = await _roomReadRepository.GetAsync(c => c.Id == dto.Id && c.entityStatus == EntityStatus.Active,"RoomEquipments.Equipment","Reviews");
+        Room room = await _roomReadRepository.GetAsync(c => c.Id == dto.Id && c.entityStatus == EntityStatus.Active, "RoomEquipments.Equipment", "Reviews");
         if (room.RoomEquipments.ToList().Count != 0)
         {
             foreach (RoomEquipment equipment in room.RoomEquipments.ToList())
@@ -75,6 +78,11 @@ public class RoomService : IRoomService
                 await _roomEquipmentWriteRepository.SaveAsync();
                 room.RoomEquipments.Remove(equipment);
             }
+        }
+        foreach (var image in dto.RoomImages)
+        {
+            byte[] bytes = Convert.FromBase64String(image.FileBase64);
+            image.FileName = FileHelper.SavePhotoToFtp(bytes, image.FileName);
         }
         room = _mapper.Map<Room>(dto);
         _roomWriteRepository.Update(room);
@@ -134,7 +142,7 @@ public class RoomService : IRoomService
     {
         if (EquipmentIds.Count > 0)
         {
-           await AddEquipments(room, EquipmentIds);
+            await AddEquipments(room, EquipmentIds);
         }
     }
 
@@ -147,7 +155,7 @@ public class RoomService : IRoomService
                 Room = room,
                 EquipmentId = equipmentId
             };
-             room.RoomEquipments.Add(roomEquipment);
+            room.RoomEquipments.Add(roomEquipment);
         }
     }
     #endregion

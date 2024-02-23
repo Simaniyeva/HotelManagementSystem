@@ -2,7 +2,7 @@
 
 namespace HotelAPI.Infrastructure.Repositories.Concretes.HotelImageRepositories;
 
-public class HotelImageWriteRepository : WriteRepository<HotelImage>, IHotelImageWriteRepository
+public class RoomImageWriteRepository : WriteRepository<HotelImage>, IHotelImageWriteRepository
 {
-    public HotelImageWriteRepository(HotelIdentityDbContext context) : base(context) { }
+    public RoomImageWriteRepository(HotelIdentityDbContext context) : base(context) { }
 }

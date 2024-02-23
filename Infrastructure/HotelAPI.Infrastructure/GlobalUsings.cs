@@ -17,4 +17,6 @@ global using Microsoft.Extensions.DependencyInjection;
 global using Scrutor;
 global using System.Linq.Expressions;
 global using HotelAPI.Persistence.DbContexts;
+global using HotelAPI.Domain.Repositories.RoomImageRepositories;
+
 

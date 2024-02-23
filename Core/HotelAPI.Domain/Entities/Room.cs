@@ -16,6 +16,8 @@ public class Room:BaseEntity, IEntityBase
     public Hotel Hotel { get; set; }
     public List<Reservation>Reservations { get; set; }
     public List<RoomEquipment> RoomEquipments { get; set; }
+    public List<RoomImage> RoomImages { get; set; }
+
 
     public Room()
     {
